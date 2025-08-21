@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{23C5A390-40E3-4651-9279-26B2BE103A16}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>OrderingSystem</RootNamespace>
+    <AssemblyName>OrderingSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.7\lib\net472\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.2, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.2\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySqlConnector.2.4.0\lib\net471\MySqlConnector.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\MyDatabase.cs" />
+    <Compile Include="KioskApp\Main\CouponFrm.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Main\CouponFrm.Designer.cs">
+      <DependentUpon>CouponFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Coupon.cs" />
+    <Compile Include="Repositories\Addon\AddonRepository.cs" />
+    <Compile Include="Repositories\Addon\IAddonRepository.cs" />
+    <Compile Include="KioskApp\Appetizers\AppetizerFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Appetizers\AppetizerFrm.Designer.cs">
+      <DependentUpon>AppetizerFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Appetizer\AppetizerRepository.cs" />
+    <Compile Include="Repositories\Appetizer\IAppetizerRepository.cs" />
+    <Compile Include="KioskApp\AddsOn\AddsFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\AddsOn\AddsFrm.Designer.cs">
+      <DependentUpon>AddsFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Card\AddsCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Card\AddsCard.Designer.cs">
+      <DependentUpon>AddsCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Card\AddsCart.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Card\AddsCart.Designer.cs">
+      <DependentUpon>AddsCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Card\CartCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Card\CartCard.Designer.cs">
+      <DependentUpon>CartCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Card\MenuCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Card\MenuCard.Designer.cs">
+      <DependentUpon>MenuCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Card\ProductCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Card\ProductCard.Designer.cs">
+      <DependentUpon>ProductCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Combos\ComboFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Combos\ComboFrm.Designer.cs">
+      <DependentUpon>ComboFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Categories\IMenuCategoryRepository.cs" />
+    <Compile Include="Repositories\Categories\IProductCategoryRepository.cs" />
+    <Compile Include="Repositories\Categories\MenuCategoryRepository.cs" />
+    <Compile Include="Repositories\Categories\ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\Combo\ComboRepository.cs" />
+    <Compile Include="Repositories\Combo\IComboRepository.cs" />
+    <Compile Include="Repositories\Coupon\CouponRepository.cs" />
+    <Compile Include="Repositories\Coupon\ICouponRepository.cs" />
+    <Compile Include="Repositories\Kiosk\IMenuSelected.cs" />
+    <Compile Include="KioskApp\Main\KioskDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Main\KioskDashboard.Designer.cs">
+      <DependentUpon>KioskDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KioskApp\Main\KioskLayout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Main\KioskLayout.Designer.cs">
+      <DependentUpon>KioskLayout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Dishes\IDishRepository.cs" />
+    <Compile Include="KioskApp\Dishes\DishFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Dishes\DishFrm.Designer.cs">
+      <DependentUpon>DishFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Dishes\DishesRepository.cs" />
+    <Compile Include="Repositories\Product\IProductRepository.cs" />
+    <Compile Include="KioskApp\Products\ProductFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KioskApp\Products\ProductFrm.Designer.cs">
+      <DependentUpon>ProductFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\Product\ProductRepository.cs" />
+    <Compile Include="Model\Addon.cs" />
+    <Compile Include="Model\Appetizer.cs" />
+    <Compile Include="Model\Combo.cs" />
+    <Compile Include="Model\Ingredient.cs" />
+    <Compile Include="Model\Menu.cs" />
+    <Compile Include="Model\Dish.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Variant.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="KioskApp\Appetizers\AppetizerFrm.resx">
+      <DependentUpon>AppetizerFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\AddsOn\AddsFrm.resx">
+      <DependentUpon>AddsFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Card\AddsCard.resx">
+      <DependentUpon>AddsCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Card\AddsCart.resx">
+      <DependentUpon>AddsCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Card\CartCard.resx">
+      <DependentUpon>CartCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Card\MenuCard.resx">
+      <DependentUpon>MenuCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Card\ProductCard.resx">
+      <DependentUpon>ProductCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Combos\ComboFrm.resx">
+      <DependentUpon>ComboFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Main\CouponFrm.resx">
+      <DependentUpon>CouponFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Main\KioskDashboard.resx">
+      <DependentUpon>KioskDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Main\KioskLayout.resx">
+      <DependentUpon>KioskLayout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Dishes\DishFrm.resx">
+      <DependentUpon>DishFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KioskApp\Products\ProductFrm.resx">
+      <DependentUpon>ProductFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dishes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appetizer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gift.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dropdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
