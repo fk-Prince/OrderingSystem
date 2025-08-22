@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using Guna.UI2.WinForms;
 using OrderingSystem.Model;
+using Menu = OrderingSystem.Model.Menu;
 
 namespace OrderingSystem.KioskApp.Card
 {
@@ -24,7 +25,7 @@ namespace OrderingSystem.KioskApp.Card
             BorderThickness = 1; ;
             name.Text = item.MenuName;
             desc.Text = item.MenuDescription;
-
+            image.Image = item.Image;
             if (item is Product p)
             {
                 foreach (Variant v in p.VariantList)

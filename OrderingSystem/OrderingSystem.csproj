@@ -195,6 +195,7 @@
     <Compile Include="Model\Variant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="util\ImageHelper.cs" />
     <EmbeddedResource Include="KioskApp\Appetizers\AppetizerFrm.resx">
       <DependentUpon>AppetizerFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -284,6 +285,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\placeholder.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

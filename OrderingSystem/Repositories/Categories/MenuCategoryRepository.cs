@@ -17,11 +17,11 @@ namespace OrderingSystem.Repositories.Categories
             {
                 var conn = await db.GetConnection();
                 string query = @"
-                                SELECT c.category_id, c.category_name 
-                                    FROM categories c 
+                                SELECT c.menu_category_id, c.menu_category_name 
+                                    FROM menu_categories c 
                                 INNER JOIN dishes m 
-                                    ON m.category_id = c.category_id 
-                                GROUP BY c.category_id, c.category_name
+                                    ON m.category_id = c.menu_category_id 
+                                GROUP BY c.menu_category_id, c.menu_category_id
                                 ";
                 var cmd = new MySqlCommand(query, conn);
 
@@ -31,8 +31,8 @@ namespace OrderingSystem.Repositories.Categories
                     while (await reader.ReadAsync())
                     {
                         Category cz = Category.Builder()
-                       .SetCategoryID(reader.GetInt32("category_id"))
-                       .SetCategoryName(reader.GetString("category_name"))
+                       .SetCategoryID(reader.GetInt32("menu_category_id"))
+                       .SetCategoryName(reader.GetString("menu_category_name"))
                        .SetCategoryType("Menu_Category")
                        .Build();
                         categories.Add(cz);

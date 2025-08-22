@@ -8,7 +8,7 @@ namespace OrderingSystem.Database
     public class MyDatabase
     {
         private static MyDatabase instance;
-        private static readonly string driver = "server=localhost;user=root;pwd=root;database=yawa;AllowUserVariables=true";
+        private static readonly string driver = "server=localhost;user=root;pwd=root;database=ordering_systems;AllowUserVariables=true";
         private MySqlConnection conn;
         private MyDatabase()
         {

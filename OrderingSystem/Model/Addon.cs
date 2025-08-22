@@ -1,4 +1,6 @@
-﻿namespace OrderingSystem.Model
+﻿using System.Drawing;
+
+namespace OrderingSystem.Model
 {
     public class Addon : Menu
     {
@@ -15,6 +17,7 @@
                 menu_name = menu_name,
                 price = price,
                 add_id = add_id,
+                image = image,
                 ingredient_id = ingredient_id,
                 currentlyMaxOrder = currentlyMaxOrder,
                 purchaseQty = purchaseQty
@@ -39,6 +42,13 @@
                 this.ad.price = name;
                 return this;
             }
+
+            public AddsOnBuilder SetAddsOnImage(Image i)
+            {
+                this.ad.image = i;
+                return this;
+            }
+
             public AddsOnBuilder SetAddsOnID(int id)
             {
                 this.ad.add_id = id;

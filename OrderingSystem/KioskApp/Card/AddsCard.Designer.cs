@@ -29,28 +29,27 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddsCard));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.image = new System.Windows.Forms.PictureBox();
             this.name = new System.Windows.Forms.Label();
             this.price = new System.Windows.Forms.Label();
             this.add = new Guna.UI2.WinForms.Guna2PictureBox();
             this.qtyy = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.max = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.add)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyy)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // image
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(110, 98);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.image.BackColor = System.Drawing.Color.Transparent;
+            this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
+            this.image.Location = new System.Drawing.Point(4, 12);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(118, 98);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.image.TabIndex = 0;
+            this.image.TabStop = false;
             // 
             // name
             // 
@@ -114,29 +113,19 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Price  ₱";
             // 
-            // max
-            // 
-            this.max.AutoSize = true;
-            this.max.Location = new System.Drawing.Point(133, 95);
-            this.max.Name = "max";
-            this.max.Size = new System.Drawing.Size(35, 13);
-            this.max.TabIndex = 14;
-            this.max.Text = "label2";
-            // 
             // AddsCard
             // 
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(311, 120);
-            this.Controls.Add(this.max);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.qtyy);
             this.Controls.Add(this.price);
             this.Controls.Add(this.name);
             this.Controls.Add(this.add);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.image);
             this.Name = "AddsCard";
             this.Text = "AddsCard";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.add)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qtyy)).EndInit();
             this.ResumeLayout(false);
@@ -146,12 +135,11 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox image;
         private System.Windows.Forms.Label name;
         private System.Windows.Forms.Label price;
         private Guna.UI2.WinForms.Guna2PictureBox add;
         private Guna.UI2.WinForms.Guna2NumericUpDown qtyy;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label max;
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using Newtonsoft.Json;
 using OrderingSystem.Database;
 using OrderingSystem.Model;
+using OrderingSystem.util;
 using Menu = OrderingSystem.Model.Menu;
 
 namespace OrderingSystem.KioskApp.AddsOn
@@ -35,6 +37,7 @@ namespace OrderingSystem.KioskApp.AddsOn
                             .SetAddsOnID(reader.GetInt32("adds_id"))
                             .SetAddsOnIngredientID(reader.GetInt32("ingredient_id"))
                             .SetAddsOnPrice(reader.GetDouble("price"))
+                            .SetAddsOnImage(ImageHelper.GetImageFromBlob(reader))
                             .SetAddsOnName(reader.GetString("adds_name"))
                             .SetAddsOnMaxOrder(reader.GetInt32("min_max_order"))
                             .Build()
@@ -44,6 +47,10 @@ namespace OrderingSystem.KioskApp.AddsOn
 
             }
             catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

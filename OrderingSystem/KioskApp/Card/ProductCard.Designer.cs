@@ -33,7 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.price = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.image = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.name = new System.Windows.Forms.Label();
             this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -44,7 +44,7 @@
             this.outStock = new Guna.UI2.WinForms.Guna2PictureBox();
             this.st = new Guna.UI2.WinForms.Guna2Panel();
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outStock)).BeginInit();
@@ -94,28 +94,28 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "₱";
             // 
-            // guna2PictureBox1
+            // image
             // 
-            this.guna2PictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.guna2PictureBox1.BorderRadius = 10;
-            this.guna2PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(247, 107);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 4;
-            this.guna2PictureBox1.TabStop = false;
-            this.guna2PictureBox1.UseTransparentBackground = true;
+            this.image.BackColor = System.Drawing.Color.Transparent;
+            this.image.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.image.BorderRadius = 10;
+            this.image.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
+            this.image.ImageRotate = 0F;
+            this.image.Location = new System.Drawing.Point(0, 0);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(247, 107);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.image.TabIndex = 4;
+            this.image.TabStop = false;
+            this.image.UseTransparentBackground = true;
             // 
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.guna2Panel1.BorderRadius = 10;
-            this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
+            this.guna2Panel1.Controls.Add(this.image);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.guna2Panel1.Location = new System.Drawing.Point(0, -1);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -193,7 +193,7 @@
             // 
             this.desc.BackColor = System.Drawing.Color.Transparent;
             this.desc.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.desc.Location = new System.Drawing.Point(28, 153);
+            this.desc.Location = new System.Drawing.Point(28, 157);
             this.desc.Name = "desc";
             this.desc.Size = new System.Drawing.Size(187, 30);
             this.desc.TabIndex = 11;
@@ -207,7 +207,7 @@
             this.outStock.FillColor = System.Drawing.Color.Transparent;
             this.outStock.Image = ((System.Drawing.Image)(resources.GetObject("outStock.Image")));
             this.outStock.ImageRotate = 0F;
-            this.outStock.Location = new System.Drawing.Point(1, 1);
+            this.outStock.Location = new System.Drawing.Point(1, 0);
             this.outStock.Name = "outStock";
             this.outStock.Size = new System.Drawing.Size(250, 107);
             this.outStock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -242,7 +242,7 @@
             this.Name = "ProductCard";
             this.Text = "ProductCard";
             ((System.ComponentModel.ISupportInitialize)(this.quantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outStock)).EndInit();
@@ -258,7 +258,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label price;
         private System.Windows.Forms.Label label3;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2PictureBox image;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label name;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;

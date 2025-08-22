@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
 using OrderingSystem.Model;
+using OrderingSystem.util;
 
 namespace OrderingSystem.KioskApp.Products
 {
@@ -49,6 +50,7 @@ namespace OrderingSystem.KioskApp.Products
                         Product p = Product.Builder()
                             .SetMenuType(reader.GetString("item_type"))
                             .SetProductID(reader.GetInt32("product_id"))
+                            .SetImage(ImageHelper.GetImageFromBlob(reader))
                             .SetProductCategoryID(reader.GetInt32("product_category_id"))
                             .SetProductName(reader.GetString("product_name"))
                             .SetProductDescription(reader.GetString("product_description"))

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
+using OrderingSystem.util;
 using Dish = OrderingSystem.Model.Dish;
 
 namespace OrderingSystem.KioskApp.Menus
@@ -35,6 +36,7 @@ namespace OrderingSystem.KioskApp.Menus
                             .SetMenuId(reader.GetInt32("menu_id"))
                             .SetDishID(reader.GetInt32("dish_id"))
                             .SetMenuName(reader.GetString("menu_name"))
+                            .SetImage(ImageHelper.GetImageFromBlob(reader))
                             .SetDescription(reader.GetString("menu_description"))
                             .SetPrice(reader.GetDouble("price"))
                             .SetCurrentlyMaxOrder(reader.GetInt32("Max_Order"))

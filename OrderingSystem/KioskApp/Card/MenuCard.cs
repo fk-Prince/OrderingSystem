@@ -28,6 +28,7 @@ namespace OrderingSystem.KioskApp.Card
             max.Text = menu.CurrentlyMaxOrder.ToString();
             FillColor = Color.LightGray;
             name.Text = menu.MenuName;
+            image.Image = menu.Image;
             desc.Text = menu.MenuDescription;
             price.Text = menu.MenuPrice.ToString("N2");
 
@@ -128,6 +129,11 @@ namespace OrderingSystem.KioskApp.Card
             ;
 
             UpdateMaxOrder(newQtyMax);
+
+        }
+
+        private void outStock_Click(object sender, EventArgs e)
+        {
 
         }
     }

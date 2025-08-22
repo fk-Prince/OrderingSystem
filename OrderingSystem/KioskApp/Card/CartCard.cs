@@ -311,6 +311,10 @@ namespace OrderingSystem.KioskApp.Card
 
         }
 
+        private void ItemType_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
 using OrderingSystem.Model;
+using OrderingSystem.util;
 
 namespace OrderingSystem.KioskApp.Combos
 {
@@ -35,6 +36,7 @@ namespace OrderingSystem.KioskApp.Combos
                           .SetMenuID(reader.GetInt32("menu_id"))
                           .SetComboID(reader.GetInt32("combo_id"))
                           .SetComboName(reader.GetString("menu_name"))
+                          .SetImage(ImageHelper.GetImageFromBlob(reader))
                           .SetComboDescription(reader.GetString("menu_description"))
                           .SetPrice(reader.GetDouble("price"))
                           .SetCurrentlyMaxOrder(reader.GetInt32("Max_Order"))

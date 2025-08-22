@@ -18,11 +18,12 @@ namespace OrderingSystem.KioskApp.Card
             FillColor = Color.FromArgb(255, 255, 255);
             BackColor = Color.Transparent;
             BorderRadius = 5;
+
             //max.Text = x.CurrentlyMaxOrder.ToString();
             //qty.Text = 0.ToString();
             name.Text = x.MenuName;
             price.Text = "₱ " + x.MenuPrice.ToString();
-
+            image.Image = x.Image;
             if (x.CurrentlyMaxOrder > 0)
             {
                 qtyy.Minimum = 1;
@@ -32,7 +33,7 @@ namespace OrderingSystem.KioskApp.Card
             {
                 qtyy.Enabled = false;
             }
-            max.Text = x.CurrentlyMaxOrder.ToString();
+            //max.Text = x.CurrentlyMaxOrder.ToString();
         }
 
 
@@ -61,7 +62,7 @@ namespace OrderingSystem.KioskApp.Card
             {
                 qtyy.Enabled = false;
             }
-            this.max.Text = x.CurrentlyMaxOrder.ToString();
+            //this.max.Text = x.CurrentlyMaxOrder.ToString();
 
             //Control p1 = this.Parent;
             //Control p2 = p1.Parent;
