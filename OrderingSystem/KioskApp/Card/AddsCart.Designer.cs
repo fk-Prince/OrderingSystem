@@ -43,7 +43,7 @@
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.xx = new System.Windows.Forms.Label();
+            this.totalQty = new System.Windows.Forms.Label();
             this.add = new Guna.UI2.WinForms.Guna2PictureBox();
             this.minus = new Guna.UI2.WinForms.Guna2PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.img)).BeginInit();
@@ -65,7 +65,6 @@
             this.img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img.TabIndex = 1;
             this.img.TabStop = false;
-            this.img.Click += new System.EventHandler(this.img_Click);
             // 
             // label1
             // 
@@ -189,12 +188,12 @@
             this.guna2PictureBox1.TabIndex = 22;
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
-            this.guna2PictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.guna2PictureBox1.Click += new System.EventHandler(this.RemoveAddonCart);
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.White;
-            this.guna2Panel2.Controls.Add(this.xx);
+            this.guna2Panel2.Controls.Add(this.totalQty);
             this.guna2Panel2.Location = new System.Drawing.Point(227, 95);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(42, 25);
@@ -202,14 +201,14 @@
             // 
             // xx
             // 
-            this.xx.BackColor = System.Drawing.Color.Transparent;
-            this.xx.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xx.Location = new System.Drawing.Point(0, 3);
-            this.xx.Name = "xx";
-            this.xx.Size = new System.Drawing.Size(42, 19);
-            this.xx.TabIndex = 0;
-            this.xx.Text = "0";
-            this.xx.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.totalQty.BackColor = System.Drawing.Color.Transparent;
+            this.totalQty.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalQty.Location = new System.Drawing.Point(0, 3);
+            this.totalQty.Name = "xx";
+            this.totalQty.Size = new System.Drawing.Size(42, 19);
+            this.totalQty.TabIndex = 0;
+            this.totalQty.Text = "0";
+            this.totalQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // add
             // 
@@ -222,7 +221,7 @@
             this.add.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.add.TabIndex = 23;
             this.add.TabStop = false;
-            this.add.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.add.Click += new System.EventHandler(this.AddQuantity);
             // 
             // minus
             // 
@@ -235,7 +234,7 @@
             this.minus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.minus.TabIndex = 24;
             this.minus.TabStop = false;
-            this.minus.Click += new System.EventHandler(this.pictureBox3_Click);
+            this.minus.Click += new System.EventHandler(this.ReduceQuantity);
             // 
             // AddsOnCart
             // 
@@ -282,7 +281,7 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private System.Windows.Forms.Label xx;
+        private System.Windows.Forms.Label totalQty;
         private Guna.UI2.WinForms.Guna2PictureBox add;
         private Guna.UI2.WinForms.Guna2PictureBox minus;
     }

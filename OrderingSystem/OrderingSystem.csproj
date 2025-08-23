@@ -88,12 +88,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\MyDatabase.cs" />
-    <Compile Include="KioskApp\Main\CouponFrm.cs">
+    <Compile Include="KioskApp\Features\CouponFrm.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="KioskApp\Main\CouponFrm.Designer.cs">
+    <Compile Include="KioskApp\Features\CouponFrm.Designer.cs">
       <DependentUpon>CouponFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuBuilder\MenuBuilderFactory.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Coupon.cs" />
     <Compile Include="Repositories\Addon\AddonRepository.cs" />
@@ -148,10 +149,10 @@
     <Compile Include="KioskApp\Combos\ComboFrm.Designer.cs">
       <DependentUpon>ComboFrm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\Categories\IMenuCategoryRepository.cs" />
-    <Compile Include="Repositories\Categories\IProductCategoryRepository.cs" />
-    <Compile Include="Repositories\Categories\MenuCategoryRepository.cs" />
-    <Compile Include="Repositories\Categories\ProductCategoryRepository.cs" />
+    <Compile Include="Repositories\MenuCategory\IMenuCategoryRepository.cs" />
+    <Compile Include="Repositories\ProductCategory\IProductCategoryRepository.cs" />
+    <Compile Include="Repositories\MenuCategory\MenuCategoryRepository.cs" />
+    <Compile Include="Repositories\ProductCategory\ProductCategoryRepository.cs" />
     <Compile Include="Repositories\Combo\ComboRepository.cs" />
     <Compile Include="Repositories\Combo\IComboRepository.cs" />
     <Compile Include="Repositories\Coupon\CouponRepository.cs" />
@@ -220,7 +221,7 @@
     <EmbeddedResource Include="KioskApp\Combos\ComboFrm.resx">
       <DependentUpon>ComboFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KioskApp\Main\CouponFrm.resx">
+    <EmbeddedResource Include="KioskApp\Features\CouponFrm.resx">
       <DependentUpon>CouponFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KioskApp\Main\KioskDashboard.resx">

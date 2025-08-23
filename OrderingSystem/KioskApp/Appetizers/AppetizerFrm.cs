@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.KioskApp.Card;
@@ -20,10 +21,13 @@ namespace OrderingSystem.KioskApp.Appetizers
             this.appetizerRepository = appetizerRepository;
             this.itemSelected = itemSelected;
             spinner.Start();
-            runAsyncFunction();
+            this.Load += async (s, e) =>
+            {
+                await runAsyncFunction();
+            };
         }
 
-        private async void runAsyncFunction()
+        private async Task runAsyncFunction()
         {
             try
             {
@@ -73,11 +77,6 @@ namespace OrderingSystem.KioskApp.Appetizers
             {
                 return instance;
             }
-        }
-
-        private void flowPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void search_TextChanged(object sender, System.EventArgs e)

@@ -136,7 +136,6 @@
             this.outStock.TabIndex = 13;
             this.outStock.TabStop = false;
             this.outStock.UseTransparentBackground = true;
-            this.outStock.Click += new System.EventHandler(this.outStock_Click);
             // 
             // name
             // 

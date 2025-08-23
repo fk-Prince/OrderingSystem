@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
+using OrderingSystem.KioskApp.MenuBuilder;
 using OrderingSystem.Model;
-using OrderingSystem.util;
 
 namespace OrderingSystem.KioskApp.Combos
 {
@@ -31,16 +31,7 @@ namespace OrderingSystem.KioskApp.Combos
                 {
                     while (await reader.ReadAsync())
                     {
-                        Combo m = Combo.Builder()
-                          .SetItemType(reader.GetString("menu_type"))
-                          .SetMenuID(reader.GetInt32("menu_id"))
-                          .SetComboID(reader.GetInt32("combo_id"))
-                          .SetComboName(reader.GetString("menu_name"))
-                          .SetImage(ImageHelper.GetImageFromBlob(reader))
-                          .SetComboDescription(reader.GetString("menu_description"))
-                          .SetPrice(reader.GetDouble("price"))
-                          .SetCurrentlyMaxOrder(reader.GetInt32("Max_Order"))
-                          .Build();
+                        Combo m = (Combo)MenuBuilderFactory.BuildFromSQL(reader);
                         cList.Add(m);
                     }
                 }

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
+using OrderingSystem.KioskApp.MenuBuilder;
 using OrderingSystem.Model;
-using OrderingSystem.util;
 
 namespace OrderingSystem.KioskApp.Appetizers
 {
@@ -28,17 +28,7 @@ namespace OrderingSystem.KioskApp.Appetizers
 
                 while (await reader.ReadAsync())
                 {
-                    Appetizer app = Appetizer.Builder()
-                        .SetMenuType(reader.GetString("menu_type"))
-                        .SetMenuId(reader.GetInt32("menu_id"))
-                        .SetAppetizerName(reader.GetString("menu_name"))
-                        .SetImage(ImageHelper.GetImageFromBlob(reader))
-                        .SetAppetizerID(reader.GetInt32("appetizer_id"))
-                        .SetDescription(reader.GetString("menu_description"))
-                        .SetPrice(reader.GetDouble("price"))
-                        .SetCurrentlyMaxOrder(reader.GetInt32("Max_Order"))
-                        .Build();
-
+                    Appetizer app = (Appetizer)MenuBuilderFactory.BuildFromSQL(reader);
                     appList.Add(app);
                 }
             }

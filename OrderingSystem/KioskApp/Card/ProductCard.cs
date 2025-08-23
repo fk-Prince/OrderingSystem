@@ -20,9 +20,15 @@ namespace OrderingSystem.KioskApp.Card
             this.item = item;
             this.cartList = cartList;
             this.itemSelected = itemSelected;
-            FillColor = Color.LightGray;
-            BorderRadius = 10;
-            BorderThickness = 1; ;
+
+
+            cardLayout();
+            displayProduct();
+            setMaxOrder();
+        }
+
+        private void displayProduct()
+        {
             name.Text = item.MenuName;
             desc.Text = item.MenuDescription;
             image.Image = item.Image;
@@ -40,10 +46,16 @@ namespace OrderingSystem.KioskApp.Card
                     price.Text = p.VariantList[0].MenuPrice.ToString("N2");
                 }
             }
-            displayMax();
         }
 
-        private void displayMax()
+        private void cardLayout()
+        {
+            FillColor = Color.LightGray;
+            BorderRadius = 10;
+            BorderThickness = 1; ;
+        }
+
+        private void setMaxOrder()
         {
             if (vList.SelectedIndex == -1) return;
             int x = 0;
@@ -67,16 +79,14 @@ namespace OrderingSystem.KioskApp.Card
                     quantity.Minimum = 0;
                     quantity.Enabled = false;
                     outStock.Visible = true;
-                    //st.Visible = false;
                 }
                 else
                 {
                     outStock.Visible = false;
-                    //st.Visible = true;
                     quantity.Minimum = 1;
                     quantity.Enabled = true;
                 }
-                displayMax();
+                setMaxOrder();
             }
         }
 

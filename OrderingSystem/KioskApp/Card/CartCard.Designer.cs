@@ -201,7 +201,6 @@
             this.ItemType.Size = new System.Drawing.Size(38, 13);
             this.ItemType.TabIndex = 13;
             this.ItemType.Text = "label2";
-            this.ItemType.Click += new System.EventHandler(this.ItemType_Click);
             // 
             // addonButton
             // 
@@ -243,7 +242,6 @@
             this.addtotal.Text = "0";
             this.addtotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.addtotal.Visible = false;
-            this.addtotal.Click += new System.EventHandler(this.addtotal_Click);
             // 
             // plbl
             // 
@@ -311,7 +309,7 @@
             this.add.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.add.TabIndex = 2;
             this.add.TabStop = false;
-            this.add.Click += new System.EventHandler(this.add_Click);
+            this.add.Click += new System.EventHandler(this.addQuantity);
             // 
             // minus
             // 
@@ -324,7 +322,7 @@
             this.minus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.minus.TabIndex = 3;
             this.minus.TabStop = false;
-            this.minus.Click += new System.EventHandler(this.minus_Click);
+            this.minus.Click += new System.EventHandler(this.reduceQty);
             // 
             // drop
             // 
@@ -338,7 +336,7 @@
             this.drop.TabIndex = 16;
             this.drop.TabStop = false;
             this.drop.Visible = false;
-            this.drop.Click += new System.EventHandler(this.drop_Click);
+            this.drop.Click += new System.EventHandler(this.dropdownClicked);
             // 
             // CartCard
             // 

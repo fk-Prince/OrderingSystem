@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿    using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.KioskApp.Card;
@@ -18,11 +19,14 @@ namespace OrderingSystem.KioskApp.Combos
             this.comboRepository = comboRepository;
             this.itemSelected = itemSelected;
             this.cartList = cartList;
-            spinner.Start();
-            runAsyncFunction();
+            this.Load += async (s, e) =>
+            {
+                spinner.Start();
+                await runAsyncFunction();
+            };
         }
 
-        private async void runAsyncFunction()
+        private async Task runAsyncFunction()
         {
             try
             {
@@ -94,5 +98,7 @@ namespace OrderingSystem.KioskApp.Combos
                 }
             }
         }
+
+
     }
 }

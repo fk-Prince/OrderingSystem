@@ -44,32 +44,29 @@ namespace OrderingSystem.KioskApp
                     lastClcked = comboButton;
                     break;
             }
-            Load += async (s, e) =>
+
+            switch (i)
             {
-                //await runAsyncFunction();
-                switch (i)
-                {
-                    case 1:
-                        LoadForm(DishFrm.MenuFrmFactory(this, cartList));
-                        break;
-                    case 2:
-                        LoadForm(ProductFrm.ProductFrmFactory(this, cartList));
-                        break;
-                    case 3:
-                        LoadForm(AppetizerFrm.AppetizerFrmFactory(this, cartList));
-                        break;
-                    case 4:
-                        LoadForm(ComboFrm.ComboFrmFactory(this, cartList));
-                        break;
-                }
-            };
+                case 1:
+                    LoadForm(DishFrm.MenuFrmFactory(this, cartList));
+                    break;
+                case 2:
+                    LoadForm(ProductFrm.ProductFrmFactory(this, cartList));
+                    break;
+                case 3:
+                    LoadForm(AppetizerFrm.AppetizerFrmFactory(this, cartList));
+                    break;
+                case 4:
+                    LoadForm(ComboFrm.ComboFrmFactory(this, cartList));
+                    break;
+            }
+
             lastClcked.ForeColor = Color.FromArgb(94, 148, 255);
         }
 
 
         public static KioskLayout KioskLayoutFactory(int i)
         {
-            //IProductCategoryRepository productCategoryRepository = new ProductCategoryRepository();
             return new KioskLayout(1);
         }
 
@@ -159,7 +156,7 @@ namespace OrderingSystem.KioskApp
 
                         if (panel is MenuCard menuCard)
                         {
-                            menuCard.UpdateMaxOrder(items.CurrentlyMaxOrder);
+                            menuCard.updateMaxOrder(items.CurrentlyMaxOrder);
 
                         }
                         else if (panel is ProductCard productCard)
@@ -319,8 +316,6 @@ namespace OrderingSystem.KioskApp
                 lastClcked.ForeColor = Color.White;
                 b.ForeColor = Color.FromArgb(94, 148, 255);
                 lastClcked = b;
-
-                //t.Start();
             }
         }
         private void CouponClicked(object sender, EventArgs e)

@@ -5,27 +5,25 @@ namespace OrderingSystem.Model
 {
     public class Dish : Menu
     {
-        private List<Addon> a;
+        private List<Addon> addon;
         private List<Ingredient> ingredientList;
-        //private int category_id;
         private int dish_id;
+        public int DishID { get => dish_id; }
+        public List<Addon> AddsOnPurchase { get => addon; }
+
 
         private Dish()
         {
-            a = new List<Addon>();
+            addon = new List<Addon>();
             ingredientList = new List<Ingredient>();
         }
 
-        public static DishBuilder Builder() => new DishBuilder();
-
-
-        public int DishID { get => dish_id; }
-        public List<Addon> AddsOnPurchase { get => a; }
 
         public void AddOnPurchase(Addon item)
         {
-            a.Add(item);
+            addon.Add(item);
         }
+        public static DishBuilder Builder() => new DishBuilder();
 
         public class DishBuilder
         {
@@ -117,6 +115,7 @@ namespace OrderingSystem.Model
                 menu_description = menu_description,
                 currentlyMaxOrder = currentlyMaxOrder,
                 category_id = category_id,
+                addon = addon,
                 purchaseQty = purchaseQty,
                 dish_id = dish_id,
             };

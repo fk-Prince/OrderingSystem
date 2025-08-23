@@ -87,7 +87,7 @@
             this.add.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.add.TabIndex = 5;
             this.add.TabStop = false;
-            this.add.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.add.Click += new System.EventHandler(this.QuantityButton);
             // 
             // qtyy
             // 
@@ -99,7 +99,6 @@
             this.qtyy.Name = "qtyy";
             this.qtyy.Size = new System.Drawing.Size(69, 36);
             this.qtyy.TabIndex = 12;
-            this.qtyy.ValueChanged += new System.EventHandler(this.guna2NumericUpDown1_ValueChanged);
             // 
             // label1
             // 

@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.spinner = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
-            this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.search = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.flowCat = new System.Windows.Forms.FlowLayoutPanel();
+            this.spinner = new Guna.UI2.WinForms.Guna2WinProgressIndicator();
+            this.flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.t = new System.Windows.Forms.Timer(this.components);
-            this.search = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
@@ -52,33 +52,25 @@
             this.guna2Panel1.Size = new System.Drawing.Size(795, 727);
             this.guna2Panel1.TabIndex = 0;
             // 
-            // spinner
+            // search
             // 
-            this.spinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.spinner.CircleSize = 3F;
-            this.spinner.Location = new System.Drawing.Point(352, 322);
-            this.spinner.MaximumSize = new System.Drawing.Size(91, 83);
-            this.spinner.MinimumSize = new System.Drawing.Size(91, 83);
-            this.spinner.Name = "spinner";
-            this.spinner.Size = new System.Drawing.Size(91, 83);
-            this.spinner.TabIndex = 2;
-            // 
-            // flowPanel
-            // 
-            this.flowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowPanel.AutoScroll = true;
-            this.flowPanel.Location = new System.Drawing.Point(0, 178);
-            this.flowPanel.Margin = new System.Windows.Forms.Padding(10);
-            this.flowPanel.MinimumSize = new System.Drawing.Size(796, 546);
-            this.flowPanel.Name = "flowPanel";
-            this.flowPanel.Padding = new System.Windows.Forms.Padding(10);
-            this.flowPanel.Size = new System.Drawing.Size(796, 546);
-            this.flowPanel.TabIndex = 1;
-            this.flowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowPanel_Paint);
+            this.search.BorderRadius = 5;
+            this.search.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.search.DefaultText = "";
+            this.search.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.search.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.search.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.search.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.search.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.search.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.search.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.search.Location = new System.Drawing.Point(12, 69);
+            this.search.Name = "search";
+            this.search.PlaceholderText = "";
+            this.search.SelectedText = "";
+            this.search.Size = new System.Drawing.Size(512, 36);
+            this.search.TabIndex = 3;
+            this.search.TextChanged += new System.EventHandler(this.search_TextChanged);
             // 
             // guna2Panel2
             // 
@@ -107,30 +99,35 @@
             this.flowCat.Size = new System.Drawing.Size(784, 81);
             this.flowCat.TabIndex = 2;
             // 
+            // spinner
+            // 
+            this.spinner.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.spinner.CircleSize = 3F;
+            this.spinner.Location = new System.Drawing.Point(352, 322);
+            this.spinner.MaximumSize = new System.Drawing.Size(91, 83);
+            this.spinner.MinimumSize = new System.Drawing.Size(91, 83);
+            this.spinner.Name = "spinner";
+            this.spinner.Size = new System.Drawing.Size(91, 83);
+            this.spinner.TabIndex = 2;
+            // 
+            // flowPanel
+            // 
+            this.flowPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowPanel.AutoScroll = true;
+            this.flowPanel.Location = new System.Drawing.Point(0, 178);
+            this.flowPanel.Margin = new System.Windows.Forms.Padding(10);
+            this.flowPanel.MinimumSize = new System.Drawing.Size(796, 546);
+            this.flowPanel.Name = "flowPanel";
+            this.flowPanel.Padding = new System.Windows.Forms.Padding(10);
+            this.flowPanel.Size = new System.Drawing.Size(796, 546);
+            this.flowPanel.TabIndex = 1;
+            // 
             // t
             // 
             this.t.Interval = 500;
             this.t.Tick += new System.EventHandler(this.t_Tick);
-            // 
-            // search
-            // 
-            this.search.BorderRadius = 5;
-            this.search.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.search.DefaultText = "";
-            this.search.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.search.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.search.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.search.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.search.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.search.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.search.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.search.Location = new System.Drawing.Point(12, 69);
-            this.search.Name = "search";
-            this.search.PlaceholderText = "";
-            this.search.SelectedText = "";
-            this.search.Size = new System.Drawing.Size(512, 36);
-            this.search.TabIndex = 3;
-            this.search.TextChanged += new System.EventHandler(this.search_TextChanged);
             // 
             // ProductFrm
             // 

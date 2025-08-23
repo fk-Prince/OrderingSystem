@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Guna.UI2.WinForms;
-using OrderingSystem.Model;
-using Dish = OrderingSystem.Model.Dish;
+using OrderingSystem.KioskApp.MenuBuilder;
 using Menu = OrderingSystem.Model.Menu;
 
 namespace OrderingSystem.KioskApp.Card
@@ -12,44 +11,43 @@ namespace OrderingSystem.KioskApp.Card
     public partial class MenuCard : Guna2Panel
     {
         private IMenuSelected itemSelected;
-        private Menu item;
+        private Menu menu;
         private List<Menu> cartList;
-        public Menu Menu => item;
-
+        public Menu Menu => menu;
         public MenuCard(Menu menu, IMenuSelected itemSelected, List<Menu> cartList)
         {
             InitializeComponent();
-            this.item = menu;
+            this.menu = menu;
             this.itemSelected = itemSelected;
             this.cartList = cartList;
+
+            cartLayout();
+            displayMenu(menu);
+            updateMaxOrder(menu.CurrentlyMaxOrder);
+        }
+
+        private void cartLayout()
+        {
             BorderColor = Color.LightGray;
             BorderRadius = 10;
             BorderThickness = 1;
-            max.Text = menu.CurrentlyMaxOrder.ToString();
+        }
+
+        private void displayMenu(Menu menu)
+        {
             FillColor = Color.LightGray;
             name.Text = menu.MenuName;
             image.Image = menu.Image;
             desc.Text = menu.MenuDescription;
             price.Text = menu.MenuPrice.ToString("N2");
-
-            UpdateMaxOrder(menu.CurrentlyMaxOrder);
-            display();
-
         }
 
-        public Menu Item { get => item; }
 
-        public void display()
-        {
-            //maxlabel.Visible = true;
-            //max.Visible = true;
-        }
 
-        public void UpdateMaxOrder(int newMax)
+
+        public void updateMaxOrder(int newMax)
         {
-            max.Text = newMax.ToString();
             quantity.Maximum = newMax;
-
             if (newMax <= 0)
             {
                 quantity.Minimum = 0;
@@ -68,8 +66,6 @@ namespace OrderingSystem.KioskApp.Card
                 outStock.Refresh();
                 quantity.Enabled = true;
             }
-            max.Text = newMax.ToString();
-            display();
         }
 
 
@@ -79,62 +75,22 @@ namespace OrderingSystem.KioskApp.Card
             int qty = (int)quantity.Value;
             if (qty <= 0) return;
 
-            int totalPurchasedQty = cartList
-                    .Where(e => (e.MenuType == item.MenuType && e.MenuID == item.MenuID) ||
-                    (e.MenuType == item.MenuType && e.MenuID == item.MenuID) ||
-                    (e.MenuType == item.MenuType && e.MenuID == item.MenuID))
+            int totalPQ = cartList
+                    .Where(e => (e.MenuType == menu.MenuType && e.MenuID == menu.MenuID) ||
+                    (e.MenuType == menu.MenuType && e.MenuID == menu.MenuID) ||
+                    (e.MenuType == menu.MenuType && e.MenuID == menu.MenuID))
                     .Sum(e => e.Purchase_Qty);
-            int newQtyMax = item.CurrentlyMaxOrder - totalPurchasedQty - qty;
+            int newQtyMax = menu.CurrentlyMaxOrder - totalPQ - qty;
             quantity.Maximum = newQtyMax;
 
 
-            if (item is Dish d)
-            {
-                Dish m = Dish.Builder()
-                     .SetMenuType(d.MenuType)
-                     .SetMenuId(d.MenuID)
-                     .SetDishID(d.DishID)
-                     .SetMenuName(d.MenuName)
-                     .SetPrice(d.MenuPrice)
-                     .SetCurrentlyMaxOrder(d.CurrentlyMaxOrder)
-                     .SetPurchaseQuantity(qty)
-                     .Build();
-                itemSelected.SelectedItem(this, m);
-            }
-            else if (item is Combo c)
-            {
-                Combo cc = Combo.Builder()
-                    .SetItemType(c.MenuType)
-                    .SetMenuID(c.MenuID)
-                    .SetComboID(c.Combo_id)
-                    .SetComboName(c.MenuName)
-                    .SetPrice(c.MenuPrice)
-                    .SetCurrentlyMaxOrder(c.CurrentlyMaxOrder)
-                    .SetPurchaseQuantity(qty)
-                    .Build();
-                itemSelected.SelectedItem(this, cc);
-            }
-            else if (item is Appetizer)
-            {
-                Appetizer cb = Appetizer.Builder()
-                   .SetMenuType(item.MenuType)
-                   .SetAppetizerID(item.MenuID)
-                   .SetAppetizerName(item.MenuName)
-                   .SetPrice(item.MenuPrice)
-                   .SetCurrentlyMaxOrder(item.CurrentlyMaxOrder)
-                   .SetPurchaseQuantity(qty)
-                   .Build();
-                itemSelected.SelectedItem(this, cb);
-            }
-            ;
 
-            UpdateMaxOrder(newQtyMax);
+            var menuBuilder = MenuBuilderFactory.Build(menu, qty);
+            itemSelected.SelectedItem(this, menuBuilder);
+            updateMaxOrder(newQtyMax);
 
         }
 
-        private void outStock_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

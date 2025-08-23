@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using MySqlConnector;
-using OrderingSystem.Database;
 using OrderingSystem.KioskApp.Card;
 using OrderingSystem.Model;
+using OrderingSystem.Repositories.Categories;
 using Menu = OrderingSystem.Model.Menu;
 
 
@@ -21,14 +21,19 @@ namespace OrderingSystem.KioskApp.Products
         private static ProductFrm instance;
         private Guna2Button lastButton;
         private List<Product> products;
-        public ProductFrm(IProductRepository productRepository, IMenuSelected itemSelected, List<Menu> cartList)
+        private List<Category> productsCategoryList;
+        private IProductCategoryRepository productCategoryRepository;
+        public ProductFrm(IProductRepository productRepository, IProductCategoryRepository productCategoryRepository, IMenuSelected itemSelected, List<Menu> cartList)
         {
             InitializeComponent();
             this.productRepository = productRepository;
+            this.productCategoryRepository = productCategoryRepository;
             this.itemSelected = itemSelected;
             this.cartList = cartList;
-            spinner.Start();
-            runAsyncFunction();
+            this.Load += async (s, e) =>
+            {
+                await runAsyncFunction();
+            };
         }
 
         public static Form ProductFrmFactory(IMenuSelected itemSelected, List<Menu> cartList)
@@ -36,7 +41,8 @@ namespace OrderingSystem.KioskApp.Products
             if (instance == null)
             {
                 IProductRepository productRepository = new ProductRepository();
-                return new ProductFrm(productRepository, itemSelected, cartList);
+                IProductCategoryRepository productCategoryRepository = new ProductCategoryRepository();
+                return new ProductFrm(productRepository, productCategoryRepository, itemSelected, cartList);
             }
             else
             {
@@ -44,76 +50,58 @@ namespace OrderingSystem.KioskApp.Products
             }
         }
 
-        private async void runAsyncFunction()
+        private async Task runAsyncFunction()
         {
-
+            spinner.Start();
             try
             {
                 products = await productRepository.GetProducts();
-                await displayCategory();
-                spinner.Stop();
-                spinner.Visible = false;
+                productsCategoryList = await productCategoryRepository.getProductCategories();
                 displayMenu(products);
+                displayCategory(productsCategoryList);
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("ex " + ex.Message);
+            }
+            finally
+            {
+                spinner.Stop();
+                spinner.Visible = false;
             }
 
         }
 
-        private async Task displayCategory()
+        private void displayCategory(List<Category> productsCategoryList)
         {
-            var db = MyDatabase.getInstance();
-            try
+            if (productsCategoryList.Count > 0)
             {
-                var conn = await db.GetConnection();
-                string query = @"
-                                SELECT c.product_category_id, c.product_category_name 
-                                    FROM product_category c 
-                                INNER JOIN product p 
-                                    ON p.product_category_id = c.product_category_id 
-                                GROUP BY c.product_category_id, c.product_category_name
-                                ";
-                var cmd = new MySqlCommand(query, conn);
+                Guna2Button ba = new Guna2Button();
+                ba.Text = "All";
+                ba.Tag = 0;
+                ba.BorderColor = Color.FromArgb(34, 34, 34);
+                ba.BorderThickness = 1;
+                ba.Click += ActiveCat;
+                ba.AutoRoundedCorners = true;
+                ba.Size = new Size(120, 40);
+                ba.ForeColor = Color.FromArgb(34, 34, 34);
+                flowCat.Controls.Add(ba);
+                lastButton = ba;
 
-                MySqlDataReader reader = await cmd.ExecuteReaderAsync();
-                if (reader.HasRows)
+                foreach (var cat in productsCategoryList)
                 {
-                    Guna2Button ba = new Guna2Button();
-                    ba.Text = "All";
-                    ba.Tag = 0;
-                    ba.BorderColor = Color.FromArgb(34, 34, 34);
-                    ba.BorderThickness = 1;
-                    ba.Click += ActiveCat;
-                    ba.AutoRoundedCorners = true;
-                    ba.Size = new Size(120, 40);
-                    ba.ForeColor = Color.FromArgb(34, 34, 34);
-                    flowCat.Controls.Add(ba);
-                    lastButton = ba;
-                    while (await reader.ReadAsync())
-                    {
-                        Guna2Button b = new Guna2Button();
-                        b.Text = reader.GetString("product_category_name");
-                        b.FillColor = Color.Transparent;
-                        b.BorderColor = Color.FromArgb(34, 34, 34);
-                        b.BorderThickness = 1;
-                        b.Tag = reader.GetInt32("product_category_id");
-                        b.Click += ActiveCat;
-                        b.AutoRoundedCorners = true;
-                        b.Size = new Size(120, 40);
-                        b.ForeColor = Color.FromArgb(34, 34, 34);
-                        flowCat.Controls.Add(b);
-                    }
+                    Guna2Button b = new Guna2Button();
+                    b.Text = cat.Category_name;
+                    b.FillColor = Color.Transparent;
+                    b.BorderColor = Color.FromArgb(34, 34, 34);
+                    b.BorderThickness = 1;
+                    b.Tag = cat.Category_id;
+                    b.Click += ActiveCat;
+                    b.AutoRoundedCorners = true;
+                    b.Size = new Size(120, 40);
+                    b.ForeColor = Color.FromArgb(34, 34, 34);
+                    flowCat.Controls.Add(b);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                await db.CloseConnection();
             }
         }
 
@@ -168,11 +156,6 @@ namespace OrderingSystem.KioskApp.Products
         {
             t.Stop();
             t.Start();
-        }
-
-        private void flowPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void search_TextChanged(object sender, System.EventArgs e)

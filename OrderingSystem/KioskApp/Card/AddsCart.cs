@@ -9,48 +9,43 @@ namespace OrderingSystem.KioskApp.Card
         public event EventHandler RemoveAddson;
         public event EventHandler ReduceQty;
         public event EventHandler AddQty;
-        private Addon a;
+        private Addon addon;
 
-        public Addon Addon => a;
-        public AddsCart(Addon a)
+        public Addon Addon => addon;
+        public AddsCart(Addon addon)
         {
             InitializeComponent();
-            this.a = a;
-            price.Text = a.MenuPrice.ToString("N2");
-            name.Text = a.MenuName;
-            qty.Text = a.Purchase_Qty.ToString();
-            xx.Text = a.Purchase_Qty.ToString();
-            total.Text = (a.MenuPrice * a.Purchase_Qty).ToString("N2");
-
+            this.addon = addon;
+            price.Text = addon.MenuPrice.ToString("N2");
+            name.Text = addon.MenuName;
+            qty.Text = addon.Purchase_Qty.ToString();
+            totalQty.Text = addon.Purchase_Qty.ToString();
+            total.Text = (addon.MenuPrice * addon.Purchase_Qty).ToString("N2");
         }
 
-        private void pictureBox1_Click(object sender, System.EventArgs e)
+        private void RemoveAddonCart(object sender, EventArgs e)
         {
             RemoveAddson?.Invoke(this, EventArgs.Empty);
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void AddQuantity(object sender, EventArgs e)
         {
             AddQty?.Invoke(this, EventArgs.Empty);
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void ReduceQuantity(object sender, EventArgs e)
         {
             ReduceQty?.Invoke(this, EventArgs.Empty);
         }
 
         public void updateText()
         {
-            price.Text = a.MenuPrice.ToString("N2");
-            name.Text = a.MenuName;
-            qty.Text = a.Purchase_Qty.ToString();
-            xx.Text = a.Purchase_Qty.ToString();
-            total.Text = (a.MenuPrice * a.Purchase_Qty).ToString("N2");
+            price.Text = addon.MenuPrice.ToString("N2");
+            name.Text = addon.MenuName;
+            qty.Text = addon.Purchase_Qty.ToString();
+            totalQty.Text = addon.Purchase_Qty.ToString();
+            total.Text = (addon.MenuPrice * addon.Purchase_Qty).ToString("N2");
         }
 
-        private void img_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

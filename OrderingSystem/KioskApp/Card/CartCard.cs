@@ -14,7 +14,7 @@ namespace OrderingSystem.KioskApp.Card
     {
 
         public Menu Item => item;
-        private Panel panel;
+        private Panel parentPanel;
         public event EventHandler NoQuantity;
         public event EventHandler QuantityChanged;
         public event EventHandler TotalChanged;
@@ -29,174 +29,51 @@ namespace OrderingSystem.KioskApp.Card
             this.item = item;
             this.cartList = cartList;
             this.baseHeight = this.Height;
-            this.panel = panel;
+            this.parentPanel = panel;
+
+            cartLayout();
 
 
+            drop.Visible = item is Dish d && d.AddsOnPurchase.Count != 0;
+            addonButton.Visible = item is Dish;
+
+            displayDetails(item);
+        }
+        private void cartLayout()
+        {
             BorderRadius = 10;
             BorderColor = Color.LightGray;
             FillColor = Color.FromArgb(228, 228, 228);
             BackColor = Color.Transparent;
             BorderThickness = 1;
-
-            if (item is Dish d)
-            {
-                drop.Visible = true;
-                addonButton.Visible = true;
-            }
-            else
-            {
-                addonButton.Visible = false;
-                drop.Visible = false;
-            }
-            displayDetails(item);
-
         }
         private void showAddonButton(object sender, EventArgs e)
         {
             if (item is Dish d)
             {
-
                 AddsFrm x = AddsFrm.AddsFrmFactory(d, cartList);
-                x.change += (xe, xr) =>
-                {
-                    displayShit();
-                };
-                DialogResult rs = x.ShowDialog(this);
+                x.purchaseQuantityChanged += (xe, xr) => displayShit();
+                x.ShowDialog(this);
             }
         }
         private void displayShit()
         {
-
-            if (item is Dish d && d.AddsOnPurchase != null && d.AddsOnPurchase.Exists(a => a.Purchase_Qty > 0))
+            if (item is Dish d && d.AddsOnPurchase.Any(a => a.Purchase_Qty > 0))
             {
-                drop.Visible = true;
-                if (isVisible)
-                {
-                    displayAddsOn();
-                }
-                else
-                {
-                    this.Height = baseHeight;
-                }
-                total.Text = ((item.Purchase_Qty * item.MenuPrice) + d.AddsOnPurchase.Sum(b => b.Purchase_Qty * b.MenuPrice)).ToString("N2");
+                updateDish(d);
             }
             else
             {
-                total.Top = addlbl.Top;
-                pp.Location = new Point(pp.Location.X, total.Bottom + 5);
-                addtotal.Visible = false;
-                addlbl.Visible = false;
-                plbl.Visible = false;
-                addtotal.Text = "0.00";
-                drop.Visible = false;
-                totallbl.Top = addlbl.Top;
-                this.Height = baseHeight;
-                drop.Visible = false;
-                total.Text = (item.Purchase_Qty * item.MenuPrice).ToString("N2");
+                updateRegular();
             }
             TotalChanged?.Invoke(this, EventArgs.Empty);
         }
-
-        private void displayAddsOn()
+        private void updateDish(Dish dish)
         {
-
-            if (item is Dish d && d.AddsOnPurchase != null && d.AddsOnPurchase.Exists(a => a.Purchase_Qty > 0))
-            {
-                drop.Visible = true;
-                foreach (Control c in this.Controls.OfType<AddsCart>().ToList())
-                {
-                    this.Controls.Remove(c);
-                }
-                foreach (Control c in this.Controls.OfType<Panel>().Where(zx => zx.BackColor == Color.LightGray).ToList())
-                {
-                    this.Controls.Remove(c);
-                }
-                Panel p = new Panel();
-                p.Width = this.Size.Width - 100;
-                p.Height = 2;
-                p.BackColor = Color.LightGray;
-                p.Location = new Point(50, baseHeight + 20);
-                this.Controls.Add(p);
-                int y = p.Bottom + 10;
-                foreach (var addon in d.AddsOnPurchase)
-                {
-                    AddsCart cart = new AddsCart(addon);
-                    cart.RemoveAddson += (ss, ee) =>
-                    {
-                        d.AddsOnPurchase.Remove(addon);
-                        displayShit();
-                    };
-                    cart.AddQty += (sss, eee) =>
-                    {
-                        var ad = ((AddsCart)sss).Addon;
-                        var a = d.AddsOnPurchase.Find(z => z.Adds_id == ad.Adds_id);
-                        if (a != null)
-                        {
-                            if (a.Purchase_Qty != a.CurrentlyMaxOrder && a.Purchase_Qty < a.CurrentlyMaxOrder)
-                            {
-                                a.Purchase_Qty++;
-                                a.CurrentlyMaxOrder--;
-                                ((AddsCart)sss).updateText();
-                            }
-                            displayShit();
-                        }
-
-                    };
-                    cart.ReduceQty += (ssss, eeee) =>
-                    {
-                        var ad = ((AddsCart)ssss).Addon;
-                        var a = d.AddsOnPurchase.Find(z => z.Adds_id == ad.Adds_id);
-                        if (a != null)
-                        {
-                            a.Purchase_Qty--;
-                            if (a.Purchase_Qty == 0)
-                            {
-                                d.AddsOnPurchase.Remove(a);
-                            }
-                            else
-                            {
-                                AddsCart ax = (AddsCart)ssss;
-                                a.CurrentlyMaxOrder++;
-                                ax.updateText();
-                            }
-                            displayShit();
-                        }
-                    };
-                    cart.Location = new Point(5, y);
-                    cart.Size = new Size(this.Width - 20, 130);
-                    this.Controls.Add(cart);
-                    y += cart.Height + 5;
-                }
-                total.Top = addlbl.Bottom + 5;
-                totallbl.Top = addlbl.Bottom + 5;
-                addtotal.Visible = true;
-                addlbl.Visible = true;
-                plbl.Visible = true;
-                addtotal.Text = d.AddsOnPurchase.Sum(b => b.Purchase_Qty * b.MenuPrice).ToString("N2");
-                pp.Location = new Point(pp.Location.X, total.Bottom + 5);
-                this.Height = y + 10;
-            }
-            else
-            {
-                total.Top = addlbl.Top;
-                pp.Location = new Point(pp.Location.X, total.Bottom + 5);
-                totallbl.Top = addlbl.Top;
-                addtotal.Visible = false;
-                addlbl.Visible = false;
-                plbl.Visible = false;
-                addtotal.Text = "0.00";
-                drop.Visible = false;
-            }
-            TotalChanged?.Invoke(this, EventArgs.Empty);
-        }
-        private void drop_Click(object sender, EventArgs e)
-        {
-            isVisible = !isVisible;
-            drop.ImageRotate = isVisible ? 180 : 0;
-            if (item is Dish z && (z.AddsOnPurchase == null || z.AddsOnPurchase.Count == 0))
-            {
-                return;
-            }
+            drop.Visible = true;
+            addlbl.Visible = true;
+            plbl.Visible = true;
+            addtotal.Visible = true;
 
             if (isVisible)
             {
@@ -204,53 +81,158 @@ namespace OrderingSystem.KioskApp.Card
             }
             else
             {
-                foreach (Control c in this.Controls)
-                {
-                    if (c is AddsCart)
-                    {
-                        this.Controls.Remove(c);
-                    }
-                }
-                this.Height = isVisible ? baseHeight : baseHeight + 20;
+                this.Height = baseHeight;
+                clearPanel();
             }
-            TotalChanged?.Invoke(this, EventArgs.Empty);
+
+            total.Text = ((item.Purchase_Qty * item.MenuPrice) + dish.AddsOnPurchase.Sum(b => b.Purchase_Qty * b.MenuPrice)).ToString("N2");
+        }
+        private void updateRegular()
+        {
+            total.Top = addlbl.Top;
+            totallbl.Top = addlbl.Top;
+            pp.Location = new Point(pp.Location.X, total.Bottom + 5);
+
+            addtotal.Visible = false;
+            addlbl.Visible = false;
+            plbl.Visible = false;
+            addtotal.Text = "0.00";
+            drop.Visible = false;
+
+            this.Height = baseHeight;
+            total.Text = (item.Purchase_Qty * item.MenuPrice).ToString("N2");
+        }
+        private void displayAddsOn()
+        {
+            if (item is Dish dish)
+            {
+                clearPanel();
+                panelSeparator();
+                displayAddOnCart(dish);
+                updateTextPosition(dish);
+            }
+        }
+        private void clearPanel()
+        {
+            var controlsToRemove = this.Controls.OfType<AddsCart>().Cast<Control>()
+                .Concat(this.Controls.OfType<Panel>().Where(p => p.BackColor == Color.LightGray));
+            foreach (var c in controlsToRemove.ToList())
+            {
+                this.Controls.Remove(c);
+            }
+        }
+        private void panelSeparator()
+        {
+            Panel p = new Panel();
+            p.Width = this.Size.Width - 100;
+            p.Height = 2;
+            p.BackColor = Color.LightGray;
+            p.Location = new Point(50, baseHeight + 20);
+            this.Controls.Add(p);
+        }
+        private void displayAddOnCart(Dish dish)
+        {
+            int y = baseHeight + 32;
+            foreach (var addon in dish.AddsOnPurchase)
+            {
+                AddsCart cart = new AddsCart(addon);
+                cart.RemoveAddson += (ss, ee) =>
+                {
+                    dish.AddsOnPurchase.Remove(addon);
+                    displayShit();
+                };
+                cart.AddQty += (sss, eee) =>
+                {
+                    var ad = ((AddsCart)sss).Addon;
+                    var a = dish.AddsOnPurchase.Find(z => z.Adds_id == ad.Adds_id);
+                    if (a != null && a.Purchase_Qty < a.CurrentlyMaxOrder)
+                    {
+                        a.Purchase_Qty++;
+                        a.CurrentlyMaxOrder--;
+                        ((AddsCart)sss).updateText();
+                        displayShit();
+                    }
+                };
+                cart.ReduceQty += (ssss, eeee) =>
+                {
+                    var ad = ((AddsCart)ssss).Addon;
+                    var a = dish.AddsOnPurchase.Find(z => z.Adds_id == ad.Adds_id);
+                    if (a != null)
+                    {
+                        a.Purchase_Qty--;
+                        if (a.Purchase_Qty == 0)
+                        {
+                            dish.AddsOnPurchase.Remove(a);
+                        }
+                        else
+                        {
+                            a.CurrentlyMaxOrder++;
+                            ((AddsCart)ssss).updateText();
+                        }
+                        displayShit();
+                    }
+                };
+                cart.Location = new Point(5, y);
+                cart.Size = new Size(this.Width - 20, 130);
+                this.Controls.Add(cart);
+                y += cart.Height + 5;
+            }
+        }
+        private void updateTextPosition(Dish d)
+        {
+            total.Top = addlbl.Bottom + 5;
+            totallbl.Top = addlbl.Bottom + 5;
+            addtotal.Text = d.AddsOnPurchase.Sum(b => b.Purchase_Qty * b.MenuPrice).ToString("N2");
+            pp.Location = new Point(pp.Location.X, total.Bottom + 5);
+            this.Height = this.Controls.OfType<AddsCart>().LastOrDefault()?.Bottom + 10 ?? baseHeight;
+        }
+        private void dropdownClicked(object sender, EventArgs e)
+        {
+            isVisible = !isVisible;
+            drop.ImageRotate = isVisible ? 180 : 0;
+            if (item is Dish d && d.AddsOnPurchase.Any())
+            {
+                if (isVisible)
+                {
+                    displayAddsOn();
+                }
+                else
+                {
+                    clearPanel();
+                    this.Height = baseHeight + 20;
+                }
+                TotalChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
         private void displayDetails(Menu menu)
         {
-            if (menu is Dish || menu is Combo || menu is Appetizer)
+            name.Text = menu.MenuName;
+            qty.Text = menu.Purchase_Qty.ToString();
+            tqty.Text = menu.Purchase_Qty.ToString();
+
+            if (menu is Product p)
             {
-                name.Text = menu.MenuName;
-                price.Text = menu.MenuPrice.ToString("N2");
-                tqty.Text = menu.Purchase_Qty.ToString();
-                qty.Text = menu.Purchase_Qty.ToString();
-                if (menu is Dish d)
-                {
-                    total.Text = ((menu.Purchase_Qty * menu.MenuPrice) + d.AddsOnPurchase.Sum(m => m.MenuPrice * m.Purchase_Qty)).ToString("N2");
-                }
-                else
-                {
-                    total.Text = (menu.MenuPrice * menu.Purchase_Qty).ToString("N2");
-                }
-                if (menu.MenuType.ToLower() == "menu")
-                {
-                    ItemType.Text = "Regular";
-                }
-                else
-                {
-                    ItemType.Text = menu.MenuType;
-                }
-            }
-            else if (menu is Product p)
-            {
-                name.Text = p.MenuName;
                 price.Text = p.Variant.MenuPrice.ToString("N2");
                 ItemType.Text = p.Variant.MenuName;
-                qty.Text = p.Purchase_Qty.ToString();
-                tqty.Text = p.Purchase_Qty.ToString();
                 total.Text = (p.Variant.MenuPrice * p.Purchase_Qty).ToString("N2");
             }
+            else
+            {
+                price.Text = menu.MenuPrice.ToString("N2");
+                ItemType.Text = (menu.MenuType.ToLower() == "menu") ? "Regular" : menu.MenuType;
+
+                double totalPrice = menu.MenuPrice * menu.Purchase_Qty;
+                if (menu is Dish d)
+                {
+                    if (d.AddsOnPurchase != null)
+                    {
+                        totalPrice += d.AddsOnPurchase.Sum(m => m.MenuPrice * m.Purchase_Qty);
+                    }
+                }
+                total.Text = totalPrice.ToString("N2");
+            }
         }
-        private void add_Click(object sender, EventArgs e)
+        private void addQuantity(object sender, EventArgs e)
         {
             if (item is Dish || item is Combo || item is Appetizer)
             {
@@ -269,13 +251,17 @@ namespace OrderingSystem.KioskApp.Card
                 }
             }
         }
-        private void minus_Click(object sender, EventArgs e)
+        private void reduceQty(object sender, EventArgs e)
         {
             if (int.Parse(qty.Text) > 0)
             {
                 updateQuantity(int.Parse(qty.Text) - 1);
                 QuantityChanged?.Invoke(this, EventArgs.Empty);
             }
+        }
+        private void removeAll(object sender, EventArgs e)
+        {
+            NoQuantity?.Invoke(this, EventArgs.Empty);
         }
         public void updateQuantity(int newQty)
         {
@@ -289,11 +275,11 @@ namespace OrderingSystem.KioskApp.Card
             item.Purchase_Qty = newQty;
 
             displayDetails(item);
-            if (panel is MenuCard menuCard)
+            if (parentPanel is MenuCard menuCard)
             {
-                menuCard.UpdateMaxOrder(menuCard.Item.CurrentlyMaxOrder - newQty);
+                menuCard.updateMaxOrder(menuCard.Menu.CurrentlyMaxOrder - newQty);
             }
-            else if (panel is ProductCard pCard)
+            else if (parentPanel is ProductCard pCard)
             {
                 if (item is Product p && p.Variant != null)
                 {
@@ -301,20 +287,7 @@ namespace OrderingSystem.KioskApp.Card
                 }
             }
         }
-        private void removeAll(object sender, EventArgs e)
-        {
-            NoQuantity?.Invoke(this, EventArgs.Empty);
-        }
 
-        private void addtotal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ItemType_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

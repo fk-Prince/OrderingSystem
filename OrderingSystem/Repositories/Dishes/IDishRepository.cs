@@ -6,6 +6,6 @@ namespace OrderingSystem.KioskApp.Menus
 {
     public interface IDishRepository
     {
-        Task<List<Dish>> RetrieveMenu();
+        Task<List<Dish>> RetrieveDish();
     }
 }

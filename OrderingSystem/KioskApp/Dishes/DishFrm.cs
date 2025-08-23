@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
-using MySqlConnector;
 using OrderingSystem.Database;
 using OrderingSystem.KioskApp.Card;
 using OrderingSystem.KioskApp.Menus;
@@ -83,16 +82,18 @@ namespace OrderingSystem.KioskApp
             try
             {
                 categories = await menuCategoryRepository.GetCategories();
-                menus = await dishRepository.RetrieveMenu();
-                spinner.Stop();
-                spinner.Visible = false;
+                menus = await dishRepository.RetrieveDish();
                 displayDishes(CloneMenuList(menus));
                 displayCategory(categories);
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
-
                 MessageBox.Show("menufrm   runAsyncFunction      " + ex.Message);
+            }
+            finally
+            {
+                spinner.Stop();
+                spinner.Visible = false;
             }
         }
         private List<Dish> CloneMenuList(List<Dish> original)

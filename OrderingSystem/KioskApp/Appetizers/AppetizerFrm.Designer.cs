@@ -62,9 +62,7 @@
             // 
             // spinner
             // 
-            this.spinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.spinner.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.spinner.CircleSize = 3F;
             this.spinner.Location = new System.Drawing.Point(350, 320);
             this.spinner.MaximumSize = new System.Drawing.Size(91, 83);
@@ -106,7 +104,6 @@
             this.flowPanel.Padding = new System.Windows.Forms.Padding(10);
             this.flowPanel.Size = new System.Drawing.Size(796, 610);
             this.flowPanel.TabIndex = 2;
-            this.flowPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowPanel_Paint);
             // 
             // t
             // 

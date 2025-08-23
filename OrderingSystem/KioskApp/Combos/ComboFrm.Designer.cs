@@ -83,9 +83,7 @@
             // 
             // spinner
             // 
-            this.spinner.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.spinner.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.spinner.CircleSize = 3F;
             this.spinner.Location = new System.Drawing.Point(350, 320);
             this.spinner.MaximumSize = new System.Drawing.Size(91, 83);

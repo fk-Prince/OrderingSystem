@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using MySqlConnector;
 using OrderingSystem.Database;
 using OrderingSystem.Model;
@@ -32,7 +31,7 @@ namespace OrderingSystem.Repositories.Categories
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                throw new Exception(ex.Message);
             }
             finally
             {
